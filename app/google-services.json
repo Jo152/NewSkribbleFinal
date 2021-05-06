@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1034941737078",
+    "project_id": "newskribble",
+    "storage_bucket": "newskribble.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1034941737078:android:4d8018e369370373f91757",
+        "android_client_info": {
+          "package_name": "com.example.newskribble"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1034941737078-fa8548m7jg6h0l3cosu0aisa1p2mq5jb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC2yiO6saagyMudR5y1FxW_vpZ_NL81Dks"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1034941737078-fa8548m7jg6h0l3cosu0aisa1p2mq5jb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
