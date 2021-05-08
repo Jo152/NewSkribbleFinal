@@ -14,3 +14,5 @@ class settings extends AppCompatActivity {
         setContentView(R.layout.activity_settings);
     }
 }
+
+// Eric test 1
