@@ -18,9 +18,9 @@ import androidx.appcompat.app.AppCompatActivity;
 public class Menu extends AppCompatActivity {
 
     MyListData[] myListData = new MyListData[] {
-            new MyListData("Note 1"),
-            new MyListData("Note 2"),
-            new MyListData("Note 3")
+            new MyListData("Note 1", "Content 1"),
+            new MyListData("Note 2", "Content 2"),
+            new MyListData("Note 3", "Content 3")
     };
     MyListAdapter adapter = new MyListAdapter(myListData);
     Button b1;
@@ -53,7 +53,7 @@ public class Menu extends AppCompatActivity {
             MyListData[] myNewListData = new MyListData[myListData.length+1];
             for(int i = 0; i < myNewListData.length; i++){
                 if(i == myNewListData.length-1){
-                    myNewListData[i] = new MyListData("Note " + (i+1));
+                    myNewListData[i] = new MyListData("Note " + (i+1), "Content " + (i+1));
                 }
                 else{
                     myNewListData[i] = myListData[i];
