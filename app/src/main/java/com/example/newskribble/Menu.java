@@ -38,11 +38,22 @@ public class Menu extends AppCompatActivity {
         b1.setOnClickListener(myhandler1);
 
         Button logout = findViewById(R.id.button_logout);
+        Button settings = findViewById(R.id.button_settings);//temp
 
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(Menu.this, Login.class);
+                startActivity(i);
+            }
+        });
+
+        //temporary settings
+        settings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public
+            void onClick(View view) {
+                Intent i = new Intent(Menu.this, Settings.class);
                 startActivity(i);
             }
         });
