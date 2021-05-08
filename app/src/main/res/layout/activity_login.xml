@@ -28,13 +28,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Skribble"
+        android:fontFamily="@font/dancingfont"
+        android:textSize="70dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Display2"
         android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.059" />
+        app:layout_constraintVertical_bias="0.052" />
 
     <TextView
         android:id="@+id/username"
@@ -56,7 +58,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="Name"
+        android:hint="Username"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -81,6 +83,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:hint="Password"
         android:inputType="textPassword"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
