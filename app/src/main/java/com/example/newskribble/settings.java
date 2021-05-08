@@ -16,3 +16,4 @@ class settings extends AppCompatActivity {
 }
 
 // Eric test 1
+// Eric test 2
