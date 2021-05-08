@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -40,7 +41,58 @@ class Settings extends AppCompatActivity {
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //see if Username contains value
+                if(!TextUtils.isEmpty(textUser.getText().toString())){
+                    Toast.makeText(getApplicationContext(), "Username contains a value", Toast.LENGTH_LONG).show();
+                    reff.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            reff.child("1").child("userName").setValue(textUser);
+                            Toast.makeText(getApplicationContext(), "Username successfully changed", Toast.LENGTH_LONG).show();
+                            //snapshot.child(Integer.toString(1)).child("userName").setValue();
+                            //snapshot.child(Integer.toString(i)).child("password").setValue();
+                        }
 
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+                }
+
+                //see if Password contains value
+                if(!TextUtils.isEmpty(textUser.getText().toString())){
+                    Toast.makeText(getApplicationContext(), "Password contains a value", Toast.LENGTH_LONG).show();
+                    reff.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            reff.child("1").child("password").setValue(textPass);
+                            Toast.makeText(getApplicationContext(), "Password successfully changed", Toast.LENGTH_LONG).show();
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+                }
+
+                //see if Email contains value
+                if(!TextUtils.isEmpty(textUser.getText().toString())){
+                    Toast.makeText(getApplicationContext(), "Email contains a value", Toast.LENGTH_LONG).show();
+                    reff.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            reff.child("1").child("email").setValue(textEmail);
+                            Toast.makeText(getApplicationContext(), "Email successfully changed", Toast.LENGTH_LONG).show();
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+                }
             }
         });
 
