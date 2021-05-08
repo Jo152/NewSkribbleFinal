@@ -96,7 +96,7 @@
         android:layout_width="133dp"
         android:layout_height="28dp"
         android:text="... or sign up here!"
-        android:onClick="nextActivity"
+        android:onClick="goToRegister"
         android:textColor="@color/black"
         android:textSize="15dp"
         app:layout_constraintBottom_toBottomOf="parent"

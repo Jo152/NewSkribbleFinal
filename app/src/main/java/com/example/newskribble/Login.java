@@ -53,6 +53,7 @@ public class Login extends AppCompatActivity {
                                 if(passFetch.equals(member.getPassword())){
                                     //Go to main menu activity
                                     Toast.makeText(getApplicationContext(), "Login Successful", Toast.LENGTH_LONG).show();
+                                    goToMenu();
                                     break;
                                 }
                             }
@@ -75,7 +76,12 @@ public class Login extends AppCompatActivity {
         });
     }
 
-    public void nextActivity(View view) {
+    public void goToRegister(View view) {
         startActivity(new Intent(this, Register.class));
+    }
+
+
+    public void goToMenu() {
+        startActivity(new Intent(this, Menu.class));
     }
 }
