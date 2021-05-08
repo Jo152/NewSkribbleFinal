@@ -51,16 +51,6 @@ public class MyListAdapter extends RecyclerView.Adapter<MyListAdapter.ViewHolder
         notifyDataSetChanged();
     }
 
-//    private void loadFragment(Fragment fragment) {
-//        // create a FragmentManager
-//        FragmentManager fm = parentFragmentManager();
-//        // create a FragmentTransaction to begin the transaction and replace the Fragment
-//        FragmentTransaction fragmentTransaction = fm.beginTransaction();
-//        // replace the FrameLayout with new Fragment
-//        fragmentTransaction.replace(R.id.frameLayout, fragment);
-//        fragmentTransaction.commit(); // save the changes
-//    }
-
     @Override
     public int getItemCount() {
         return listdata.length;
