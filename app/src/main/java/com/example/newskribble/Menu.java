@@ -71,9 +71,10 @@ public class Menu extends AppCompatActivity {
         //temporary settings
         settings.setOnClickListener(new View.OnClickListener() {
             @Override
-            public
-            void onClick(View view) {
+            public void onClick(View view) {
+                String accountId = getIntent().getStringExtra("currIdAccount");
                 Intent i = new Intent(Menu.this, Settings.class);
+                i.putExtra("currIdAccount",  accountId);
                 startActivity(i);
             }
         });

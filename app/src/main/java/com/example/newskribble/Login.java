@@ -37,7 +37,6 @@ public class Login extends AppCompatActivity {
             public void onClick(View v) {
                 member.setUserName(textUserName1.getText().toString().trim());
                 member.setPassword(textPassword.getText().toString().trim());
-                System.out.println("userName: " + member.getUserName() + "\npassword: " + member.getPassword() );
                 reff = FirebaseDatabase.getInstance().getReference().child("Member");
                 reff.addValueEventListener(new ValueEventListener() {
                     @Override
@@ -51,13 +50,17 @@ public class Login extends AppCompatActivity {
                             if(userNameFetch.equals(member.getUserName())){
                                 String passFetch = snapshot.child(Integer.toString(i)).child("password").getValue().toString();
                                 if(passFetch.equals(member.getPassword())){
-                                    //Go to main menu activity
-                                    goToMenu();
+                                    //Go to main menu activity with i (current account)
+                                    goToMenu(i);
                                     break;
                                 }
+                                else {
+                                    Toast.makeText(getApplicationContext(),"Username or Password is incorrect. Try Again", Toast.LENGTH_SHORT).show();
+                                }
                             }
-
-
+                            else{
+                                Toast.makeText(getApplicationContext(),"Username or Password is incorrect. Try Again", Toast.LENGTH_SHORT).show();
+                            }
 
                         }
 
@@ -80,7 +83,12 @@ public class Login extends AppCompatActivity {
     }
 
 
-    public void goToMenu() {
-        startActivity(new Intent(this, Menu.class));
+    public void goToMenu(int accountId) {
+
+        Intent intent = new Intent(this, Menu.class);
+        //send id to next activity
+        intent.putExtra("currIdAccount",  Integer.toString(accountId));
+        startActivity(intent);
+        finish();
     }
 }
