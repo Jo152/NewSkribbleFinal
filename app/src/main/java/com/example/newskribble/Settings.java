@@ -65,7 +65,7 @@ class Settings extends AppCompatActivity {
                 }
 
                 //see if Password contains value
-                if(TextUtils.isEmpty(textUser.getText().toString()) == false){
+                if(TextUtils.isEmpty(textPass.getText().toString()) == false){
                     Toast.makeText(getApplicationContext(), "Password contains a value", Toast.LENGTH_LONG).show();
                     reff.addValueEventListener(new ValueEventListener() {
                         @Override
@@ -82,7 +82,7 @@ class Settings extends AppCompatActivity {
                 }
 
                 //see if Email contains value
-                if(TextUtils.isEmpty(textUser.getText().toString()) == false){
+                if(TextUtils.isEmpty(textEmail.getText().toString()) == false){
                     Toast.makeText(getApplicationContext(), "Email contains a value", Toast.LENGTH_LONG).show();
                     reff.addValueEventListener(new ValueEventListener() {
                         @Override
