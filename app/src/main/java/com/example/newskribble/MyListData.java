@@ -2,14 +2,24 @@ package com.example.newskribble;
 
 public class MyListData{
 
+    private int id;
     private String title;
     private String content;
 
     public MyListData(){}
 
-    public MyListData(String title, String content) {
+    public MyListData(int id, String title, String content) {
+        this.id = id;
         this.title = title;
         this.content = content;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getTitle() {

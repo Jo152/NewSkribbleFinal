@@ -30,14 +30,16 @@ public class MyListAdapter extends RecyclerView.Adapter<MyListAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull MyListAdapter.ViewHolder holder, int position) {
-        MyListData myListData = list.get(position);
-        holder.title.setText(myListData.getTitle());
+        MyListData data = list.get(position);
+        holder.title.setText(data.getTitle());
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(context, "Recycle Click " + (position+1), Toast.LENGTH_SHORT).show();
-                context.startActivity(new Intent(context, Note.class));
+                Intent intent = new Intent(context, Note.class);
+                intent.putExtra("id", data.getId());
+                context.startActivity(intent);
+
             }
         });
     }
