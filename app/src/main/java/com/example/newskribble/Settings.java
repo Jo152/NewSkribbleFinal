@@ -47,14 +47,12 @@ class Settings extends AppCompatActivity {
 
                 //see if Username contains value
                 if(TextUtils.isEmpty(textUser.getText().toString()) == false){//check if username is different
-                    Toast.makeText(getApplicationContext(), "Username contains a value", Toast.LENGTH_LONG).show();
+                    //Toast.makeText(getApplicationContext(), "Username contains a value", Toast.LENGTH_LONG).show();
                     reff.addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             reff.child(accountId).child("userName").setValue(textUser.getText().toString());
                             Toast.makeText(getApplicationContext(), "Username successfully changed", Toast.LENGTH_LONG).show();
-                            //snapshot.child(Integer.toString(1)).child("userName").setValue();
-                            //snapshot.child(Integer.toString(i)).child("password").setValue();
                         }
 
                         @Override
@@ -66,7 +64,7 @@ class Settings extends AppCompatActivity {
 
                 //see if Password contains value
                 if(TextUtils.isEmpty(textPass.getText().toString()) == false){
-                    Toast.makeText(getApplicationContext(), "Password contains a value", Toast.LENGTH_LONG).show();
+                    //Toast.makeText(getApplicationContext(), "Password contains a value", Toast.LENGTH_LONG).show();
                     reff.addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -83,7 +81,7 @@ class Settings extends AppCompatActivity {
 
                 //see if Email contains value
                 if(TextUtils.isEmpty(textEmail.getText().toString()) == false){
-                    Toast.makeText(getApplicationContext(), "Email contains a value", Toast.LENGTH_LONG).show();
+                    //Toast.makeText(getApplicationContext(), "Email contains a value", Toast.LENGTH_LONG).show();
                     reff.addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
