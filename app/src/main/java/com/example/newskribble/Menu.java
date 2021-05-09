@@ -2,39 +2,59 @@ package com.example.newskribble;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Adapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-//import android.support.v7.widget.LinearLayoutManager;
-//import android.support.v7.widget.RecyclerView;
-//import android.support.v7.app.AppCompatActivity;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 public class Menu extends AppCompatActivity {
 
-    MyListData[] myListData = new MyListData[] {
-            new MyListData("Note 1", "Content 1"),
-            new MyListData("Note 2", "Content 2"),
-            new MyListData("Note 3", "Content 3")
-    };
-    MyListAdapter adapter = new MyListAdapter(myListData);
-    Button b1;
+    private RecyclerView recyclerView;
+    private ArrayList<MyListData> myListData;
+    private MyListAdapter adapter;
+    private FirebaseFirestore db;
+    private int n1 = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+        myListData = new ArrayList<>();
+        adapter = new MyListAdapter(myListData, this);
+        db = FirebaseFirestore.getInstance();
+
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
 
-        b1 = (Button) findViewById(R.id.button_note);
+        getDataFromFirestore();
+
+        Button b1 = (Button) findViewById(R.id.button_note);
         b1.setOnClickListener(myhandler1);
 
         Button logout = findViewById(R.id.button_logout);
@@ -61,19 +81,60 @@ public class Menu extends AppCompatActivity {
 
     View.OnClickListener myhandler1 = new View.OnClickListener() {
         public void onClick(View view) {
-            MyListData[] myNewListData = new MyListData[myListData.length+1];
-            for(int i = 0; i < myNewListData.length; i++){
-                if(i == myNewListData.length-1){
-                    myNewListData[i] = new MyListData("Note " + (i+1), "Content " + (i+1));
-                }
-                else{
-                    myNewListData[i] = myListData[i];
-                }
-            }
-            myListData = myNewListData;
-            adapter.setListData(myListData);
+            String title = "Note " + n1;;
+            String content = "Write something...";
+            addDataToFirestore(title, content);
         }
     };
 
+    private void addDataToFirestore(String title, String content) {
+        Map<String, Object> note = new HashMap<>();
+        note.put("title", title);
+        note.put("content", content);
+        db.collection("notes").document(String.valueOf(n1))
+                .set(note)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        n1++;
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w("TAG", "Error writing document", e);
+                    }
+                });
 
+        //temporary way to live update
+        n1 = 1;
+        getDataFromFirestore();
+    }
+
+    private void getDataFromFirestore(){
+        db.collection("notes").get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                        if (!queryDocumentSnapshots.isEmpty()) {
+                            myListData.clear();
+                            myListData.trimToSize();
+                            List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
+                            for (DocumentSnapshot d : list) {
+                                MyListData c = d.toObject(MyListData.class);
+                                myListData.add(c);
+                                n1++;
+                            }
+                            adapter.notifyDataSetChanged();
+                        } else {
+                            Toast.makeText(Menu.this, "No data found in Database", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(Menu.this, "Fail to get the data.", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
 }

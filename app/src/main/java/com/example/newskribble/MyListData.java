@@ -5,9 +5,7 @@ public class MyListData{
     private String title;
     private String content;
 
-    public MyListData(){
-        // empty constructor required for firebase.
-    }
+    public MyListData(){}
 
     public MyListData(String title, String content) {
         this.title = title;
