@@ -81,14 +81,16 @@ public class Menu extends AppCompatActivity {
 
     View.OnClickListener myhandler1 = new View.OnClickListener() {
         public void onClick(View view) {
+            int id = n1;
             String title = "Note " + n1;;
             String content = "Write something...";
-            addDataToFirestore(title, content);
+            addDataToFirestore(id, title, content);
         }
     };
 
-    private void addDataToFirestore(String title, String content) {
+    private void addDataToFirestore(int id, String title, String content) {
         Map<String, Object> note = new HashMap<>();
+        note.put("id", id);
         note.put("title", title);
         note.put("content", content);
         db.collection("notes").document(String.valueOf(n1))
