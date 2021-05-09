@@ -53,9 +53,19 @@ public class Menu extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
 
-        ItemTouchHelper itemTouchHelper = new
-                ItemTouchHelper(new SwipeToDeleteCallback(adapter));
-        itemTouchHelper.attachToRecyclerView(recyclerView);
+        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+            @Override
+            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+                int position = viewHolder.getAdapterPosition();
+                position++;
+                deleteDocument(position);
+            }
+        }).attachToRecyclerView(recyclerView);
 
         getDataFromFirestore();
 
@@ -99,12 +109,16 @@ public class Menu extends AppCompatActivity {
         note.put("id", id);
         note.put("title", title);
         note.put("content", content);
+
         db.collection("notes").document(String.valueOf(n1))
                 .set(note)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
                         n1++;
+                        MyListData data = new MyListData(id, title, content);
+                        myListData.add(myListData.size(), data);
+                        adapter.notifyDataSetChanged();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
@@ -114,9 +128,6 @@ public class Menu extends AppCompatActivity {
                     }
                 });
 
-        //temporary way to live update
-        n1 = 1;
-        getDataFromFirestore();
     }
 
     private void getDataFromFirestore(){
@@ -125,8 +136,6 @@ public class Menu extends AppCompatActivity {
                     @Override
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                         if (!queryDocumentSnapshots.isEmpty()) {
-                            myListData.clear();
-                            myListData.trimToSize();
                             List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
                             for (DocumentSnapshot d : list) {
                                 MyListData c = d.toObject(MyListData.class);
@@ -144,5 +153,27 @@ public class Menu extends AppCompatActivity {
                 Toast.makeText(Menu.this, "Fail to get the data.", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    public void deleteDocument(int id){
+        db.collection("notes").document(String.valueOf(id))
+                .delete()
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d("TAG", "DocumentSnapshot successfully deleted!");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w("TAG", "Error deleting document", e);
+                    }
+                });
+        n1--;
+        myListData.remove(id-1);
+        recyclerView.removeViewAt(id-1);
+        adapter.notifyItemRemoved(id);
+        adapter.notifyItemRangeChanged(id, myListData.size());
     }
 }
