@@ -46,6 +46,9 @@ public class Note extends AppCompatActivity {
                     if (document.exists()) {
                         Log.d("TAG", "DocumentSnapshot data: " + document.getData());
                         data = document.toObject(MyListData.class);
+                        Log.d("TAG", "data: " + data.getId());
+                        Log.d("TAG", "data: " + data.getTitle());
+                        Log.d("TAG", "data: " + data.getContent());
                     } else {
                         Log.d("TAG", "No such document");
                     }
