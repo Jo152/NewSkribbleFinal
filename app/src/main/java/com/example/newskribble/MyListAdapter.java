@@ -9,6 +9,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -33,6 +34,8 @@ public class MyListAdapter extends RecyclerView.Adapter<MyListAdapter.ViewHolder
         MyListData data = list.get(position);
         holder.title.setText(data.getTitle());
 
+        holder.mCardView.setTag(position);
+
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -51,10 +54,20 @@ public class MyListAdapter extends RecyclerView.Adapter<MyListAdapter.ViewHolder
 
     class ViewHolder extends RecyclerView.ViewHolder {
         private final TextView title;
+        public View mCardView;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             title = itemView.findViewById(R.id.textView);
+
+            mCardView = (CardView) itemView.findViewById(R.id.thing);
         }
+    }
+
+    public Context getContext(){ return context; }
+
+    public void deleteItem(int position) {
+        list.remove(position);
+        notifyItemRemoved(position);
     }
 }
