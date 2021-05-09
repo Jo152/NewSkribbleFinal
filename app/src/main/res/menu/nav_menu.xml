@@ -2,10 +2,22 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/menuTab"
-        android:title="Menu Item" />
+        android:id="@+id/notesTab"
+        android:title="Notes"
+        android:icon="@drawable/ic_notes"/>
 
     <item
         android:id="@+id/settingsTab"
-        android:title="settings" />
+        android:title="Settings"
+        android:icon="@drawable/ic_settings"/>
+
+    <item
+        android:id="@+id/LanguageTab"
+        android:title="Language"
+        android:icon="@drawable/ic_language"/>
+
+    <item
+        android:id="@+id/MusicTab"
+        android:title="Music"
+        android:icon="@drawable/ic_music"/>
 </menu>
