@@ -88,7 +88,7 @@ public class Menu extends AppCompatActivity {
     View.OnClickListener myhandler1 = new View.OnClickListener() {
         public void onClick(View view) {
             int id = n1;
-            String title = "Note " + n1;;
+            String title = "New Note";;
             String content = "";
             addDataToFirestore(id, title, content);
         }
