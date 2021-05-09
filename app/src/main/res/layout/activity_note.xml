@@ -14,9 +14,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:background="#660099"
-
-        tools:text="Menu"/>
+        android:background="#660099"/>
 
     <EditText
         android:id="@+id/note_title"
