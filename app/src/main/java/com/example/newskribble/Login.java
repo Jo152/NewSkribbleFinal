@@ -51,15 +51,18 @@ public class Login extends AppCompatActivity {
                                 String passFetch = snapshot.child(Integer.toString(i)).child("password").getValue().toString();
                                 if(passFetch.equals(member.getPassword())){
                                     //Go to main menu activity with i (current account)
+                                    Toast.makeText(getApplicationContext(),"Login Successful", Toast.LENGTH_SHORT).show();
                                     goToMenu(i);
                                     break;
                                 }
-                                else {
+                                else if(i == maxId) {
                                     Toast.makeText(getApplicationContext(),"Username or Password is incorrect. Try Again", Toast.LENGTH_SHORT).show();
+                                    break;
                                 }
                             }
-                            else{
+                            else if(i == maxId){
                                 Toast.makeText(getApplicationContext(),"Username or Password is incorrect. Try Again", Toast.LENGTH_SHORT).show();
+                                break;
                             }
 
                         }
