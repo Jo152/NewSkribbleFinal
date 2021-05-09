@@ -1,11 +1,15 @@
 package com.example.newskribble;
 
+import com.google.firebase.firestore.IgnoreExtraProperties;
+
+@IgnoreExtraProperties
 public class MyListData{
 
     private int id;
     private String title;
     private String content;
 
+    // Default constructor for Firebase
     public MyListData(){}
 
     public MyListData(int id, String title, String content) {

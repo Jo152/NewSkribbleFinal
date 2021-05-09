@@ -15,11 +15,38 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:background="#660099"
+
+        tools:text="Menu"/>
+
+    <EditText
+        android:id="@+id/note_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        app:layout_constraintEnd_toEndOf="@+id/note_header"
+        app:layout_constraintStart_toStartOf="@+id/note_header"
+        app:layout_constraintTop_toTopOf="@+id/note_header"
+        android:background="@android:color/transparent"
         android:text="Note"
         android:textColor="@color/black"
         android:gravity="center"
+        android:textSize="25sp" />
+
+    <Button
+        android:id="@+id/button_goMenu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="2dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="6dp"
+        android:text="Back"
+        android:textColor="@color/black"
+        android:gravity="center"
         android:textSize="20sp"
-        tools:text="Menu"/>
+        app:layout_constraintBottom_toBottomOf="@+id/note_title"
+        app:layout_constraintEnd_toEndOf="@+id/note_title"
+        app:layout_constraintTop_toTopOf="@+id/note_title"
+        />
 
     <EditText
         android:id="@+id/note_text"
@@ -29,7 +56,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/note_header"
-        android:hint="text" />
+        android:hint="Write something..." />
 
     <TextView
         android:id="@+id/note_bottom"
@@ -47,7 +74,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="2dp"
         android:layout_marginTop="2dp"
-        android:text="Add"
+        android:text="Enter"
         android:textColor="@color/black"
         android:gravity="center"
         android:textSize="20sp"

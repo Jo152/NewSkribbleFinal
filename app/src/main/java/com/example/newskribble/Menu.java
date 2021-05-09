@@ -84,7 +84,7 @@ public class Menu extends AppCompatActivity {
         public void onClick(View view) {
             int id = n1;
             String title = "Note " + n1;;
-            String content = "Write something...";
+            String content = "";
             addDataToFirestore(id, title, content);
         }
     };
