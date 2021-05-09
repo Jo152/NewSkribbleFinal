@@ -1,80 +1,58 @@
 package com.example.newskribble;
 
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-//import android.support.v7.widget.RecyclerView;
 
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 
-public class MyListAdapter extends RecyclerView.Adapter<MyListAdapter.ViewHolder>{
-    private MyListData[] listdata;
+public class MyListAdapter extends RecyclerView.Adapter<MyListAdapter.ViewHolder> {
+    private ArrayList<MyListData> list;
+    private Context context;
 
-    // RecyclerView recyclerView;
-    public MyListAdapter(MyListData[] listdata) {
-        this.listdata = listdata;
-    }
-    @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        View listItem= layoutInflater.inflate(R.layout.list_items, parent, false);
-        ViewHolder viewHolder = new ViewHolder(listItem);
-        return viewHolder;
+    public MyListAdapter(ArrayList<MyListData> list, Context context) {
+        this.list = list;
+        this.context = context;
     }
 
+    @NonNull
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
-        final MyListData myListData = listdata[position];
-        holder.textView.setText(listdata[position].getTitle());
-        // holder.imageView.setImageResource(listdata[position].getImgId());
-        holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
+    public MyListAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        return new ViewHolder(LayoutInflater.from(context).inflate(R.layout.list_items, parent, false));
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull MyListAdapter.ViewHolder holder, int position) {
+        MyListData myListData = list.get(position);
+        holder.title.setText(myListData.getTitle());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(view.getContext(),"click on item: "+myListData.getTitle(),Toast.LENGTH_LONG).show();
-                // Open the fragment
-
+                Toast.makeText(context, "Recycle Click " + (position+1), Toast.LENGTH_SHORT).show();
+                context.startActivity(new Intent(context, Note.class));
             }
         });
     }
 
-    public void setListData(MyListData[] list) {
-        listdata = list;
-        notifyDataSetChanged();
-    }
-
-//    private void loadFragment(Fragment fragment) {
-//        // create a FragmentManager
-//        FragmentManager fm = parentFragmentManager();
-//        // create a FragmentTransaction to begin the transaction and replace the Fragment
-//        FragmentTransaction fragmentTransaction = fm.beginTransaction();
-//        // replace the FrameLayout with new Fragment
-//        fragmentTransaction.replace(R.id.frameLayout, fragment);
-//        fragmentTransaction.commit(); // save the changes
-//    }
-
     @Override
     public int getItemCount() {
-        return listdata.length;
+        return list.size();
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
-        public ImageView imageView;
-        public TextView textView;
-        public RelativeLayout relativeLayout;
-        public ViewHolder(View itemView) {
+    class ViewHolder extends RecyclerView.ViewHolder {
+        private final TextView title;
+
+        public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            // this.imageView = (ImageView) itemView.findViewById(R.id.imageView);
-            this.textView = (TextView) itemView.findViewById(R.id.textView);
-            relativeLayout = (RelativeLayout)itemView.findViewById(R.id.relativeLayout);
+            title = itemView.findViewById(R.id.textView);
         }
     }
 }
