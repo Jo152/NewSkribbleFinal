@@ -200,6 +200,7 @@ public class Menu extends AppCompatActivity {
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         drawerLayout.closeDrawer(GravityCompat.START);
         if(item.getItemId() == R.id.notesTab){
+            System.out.print("notes has been pressed");
             Toast.makeText(this, "Btn is clicked.", Toast.LENGTH_SHORT).show();
         }
         return false;
