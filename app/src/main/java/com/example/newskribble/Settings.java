@@ -39,15 +39,19 @@ class Settings extends AppCompatActivity {
         reff = FirebaseDatabase.getInstance().getReference().child("Member");
 
         btnSave.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
+                //Current account ID
+                String accountId = getIntent().getStringExtra("currIdAccount");
+
                 //see if Username contains value
                 if(TextUtils.isEmpty(textUser.getText().toString()) == false){//check if username is different
                     Toast.makeText(getApplicationContext(), "Username contains a value", Toast.LENGTH_LONG).show();
                     reff.addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            reff.child("1").child("userName").setValue(textUser.getText().toString());
+                            reff.child(accountId).child("userName").setValue(textUser.getText().toString());
                             Toast.makeText(getApplicationContext(), "Username successfully changed", Toast.LENGTH_LONG).show();
                             //snapshot.child(Integer.toString(1)).child("userName").setValue();
                             //snapshot.child(Integer.toString(i)).child("password").setValue();
@@ -66,7 +70,7 @@ class Settings extends AppCompatActivity {
                     reff.addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            reff.child("1").child("password").setValue(textPass.getText().toString());
+                            reff.child(accountId).child("password").setValue(textPass.getText().toString());
                             Toast.makeText(getApplicationContext(), "Password successfully changed", Toast.LENGTH_LONG).show();
                         }
 
@@ -83,7 +87,7 @@ class Settings extends AppCompatActivity {
                     reff.addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            reff.child("1").child("email").setValue(textEmail.getText().toString());
+                            reff.child(accountId).child("email").setValue(textEmail.getText().toString());
                             Toast.makeText(getApplicationContext(), "Email successfully changed", Toast.LENGTH_LONG).show();
                         }
 
