@@ -52,7 +52,6 @@ public class Login extends AppCompatActivity {
                                 String passFetch = snapshot.child(Integer.toString(i)).child("password").getValue().toString();
                                 if(passFetch.equals(member.getPassword())){
                                     //Go to main menu activity
-                                    Toast.makeText(getApplicationContext(), "Login Successful", Toast.LENGTH_LONG).show();
                                     goToMenu();
                                     break;
                                 }
