@@ -52,10 +52,6 @@ public class Home extends AppCompatActivity {
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new MenuFragment()).commit();
                 break;
             case R.id.settingsTab:
-                /*String accountId = getIntent().getStringExtra("currIdAccount");
-                Intent i = new Intent(Menu.this, SettingsFragment.class);
-                i.putExtra("currIdAccount",  accountId);
-                startActivity(i);*/
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new SettingsFragment()).commit();
                 break;
             case R.id.LanguageTab:
