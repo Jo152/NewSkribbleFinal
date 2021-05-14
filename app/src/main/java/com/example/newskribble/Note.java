@@ -83,6 +83,8 @@ public class Note extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 changeContent();
+                Intent i = new Intent(Note.this, Menu.class);
+                startActivity(i);
             }
         });
 
