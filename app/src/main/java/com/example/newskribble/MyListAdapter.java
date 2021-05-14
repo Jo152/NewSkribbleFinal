@@ -42,7 +42,6 @@ public class MyListAdapter extends RecyclerView.Adapter<MyListAdapter.ViewHolder
                 Intent intent = new Intent(context, Note.class);
                 intent.putExtra("id", data.getId());
                 context.startActivity(intent);
-
             }
         });
     }

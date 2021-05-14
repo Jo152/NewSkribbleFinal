@@ -123,6 +123,11 @@ public class Menu extends AppCompatActivity {
             String title = "New Note";;
             String content = "";
             addDataToFirestore(id, title, content);
+
+            // Go to new note activity
+            Intent i = new Intent(Menu.this, Note.class);
+            i.putExtra("id", id);
+            startActivity(i);
         }
     };
 
