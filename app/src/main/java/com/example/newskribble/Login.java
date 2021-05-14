@@ -88,7 +88,7 @@ public class Login extends AppCompatActivity {
 
     public void goToMenu(int accountId) {
 
-        Intent intent = new Intent(this, Menu.class);
+        Intent intent = new Intent(this, Home.class);
         //send id to next activity
         intent.putExtra("currIdAccount",  Integer.toString(accountId));
         startActivity(intent);
