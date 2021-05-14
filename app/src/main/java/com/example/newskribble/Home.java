@@ -50,15 +50,17 @@ public class Home extends AppCompatActivity {
         switch (menuItem.getItemId()){
             case R.id.notesTab:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new MenuFragment()).commit();
+                drawerLayout.closeDrawer(GravityCompat.START);
                 break;
             case R.id.settingsTab:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new SettingsFragment()).commit();
+                drawerLayout.closeDrawer(GravityCompat.START);
                 break;
             case R.id.LanguageTab:
-
+                drawerLayout.closeDrawer(GravityCompat.START);
                 break;
             case R.id.MusicTab:
-
+                drawerLayout.closeDrawer(GravityCompat.START);
                 break;
         }
 
