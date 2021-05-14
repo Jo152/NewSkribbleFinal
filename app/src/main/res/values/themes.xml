@@ -17,4 +17,13 @@
     <style name="SplashTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="android:windowBackground">@drawable/backgroud_splash</item>
     </style>
+
+    <style name="Theme.NewSkribble.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.NewSkribble.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.NewSkribble.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>
