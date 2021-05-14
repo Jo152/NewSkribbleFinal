@@ -5,9 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Adapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -20,16 +18,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
@@ -95,7 +88,6 @@ public class Menu extends AppCompatActivity {
         b1.setOnClickListener(myhandler1);
 
         Button logout = findViewById(R.id.button_logout);
-        Button settings = findViewById(R.id.button_settings);//temp
 
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -104,17 +96,18 @@ public class Menu extends AppCompatActivity {
                 startActivity(i);
             }
         });
+    }
 
-        //temporary settings
-        settings.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String accountId = getIntent().getStringExtra("currIdAccount");
-                Intent i = new Intent(Menu.this, Settings.class);
-                i.putExtra("currIdAccount",  accountId);
-                startActivity(i);
-            }
-        });
+    //close drawer on back press instead of app
+    @Override
+    public
+    void onBackPressed() {
+        if(drawerLayout.isDrawerOpen(GravityCompat.START)){
+            drawerLayout.closeDrawer(GravityCompat.START);
+        }
+        else{
+            super.onBackPressed();
+        }
     }
 
     View.OnClickListener myhandler1 = new View.OnClickListener() {
@@ -203,11 +196,31 @@ public class Menu extends AppCompatActivity {
     }
 
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        drawerLayout.closeDrawer(GravityCompat.START);
+        /*drawerLayout.closeDrawer(GravityCompat.START);
         if(item.getItemId() == R.id.notesTab){
             System.out.print("notes has been pressed");
             Toast.makeText(this, "Btn is clicked.", Toast.LENGTH_SHORT).show();
         }
-        return false;
+        return false;*/
+        switch (item.getItemId()){
+            case R.id.notesTab:
+
+                break;
+            case R.id.settingsTab:
+                /*String accountId = getIntent().getStringExtra("currIdAccount");
+                Intent i = new Intent(Menu.this, SettingsFragment.class);
+                i.putExtra("currIdAccount",  accountId);
+                startActivity(i);*/
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new SettingsFragment()).commit();
+                break;
+            case R.id.LanguageTab:
+
+                break;
+            case R.id.MusicTab:
+
+                break;
+        }
+
+        return true;
     }
 }
