@@ -144,11 +144,12 @@ class MenuFragment extends Fragment {
         note.put("id", id);
         note.put("title", title);
         note.put("content", content);
-        db.collection("notes").document(String.valueOf(n1))
-                .set(note)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
+        db.collection("notes")
+                .add(note)
+                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
-                    public void onSuccess(Void aVoid) {
+                    public void onSuccess(DocumentReference documentReference) {
+                        Log.d("TAG", "DocumentSnapshot written with ID: " + documentReference.getId());
                         n1++;
                         MyListData data = new MyListData(id, title, content);
                         myListData.add(myListData.size(), data);
@@ -158,9 +159,26 @@ class MenuFragment extends Fragment {
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Log.w("TAG", "Error writing document", e);
+                        Log.w("TAG", "Error adding document", e);
                     }
                 });
+//        db.collection("notes").document(String.valueOf(n1))
+//                .set(note)
+//                .addOnSuccessListener(new OnSuccessListener<Void>() {
+//                    @Override
+//                    public void onSuccess(Void aVoid) {
+//                        n1++;
+//                        MyListData data = new MyListData(id, title, content);
+//                        myListData.add(myListData.size(), data);
+//                        adapter.notifyDataSetChanged();
+//                    }
+//                })
+//                .addOnFailureListener(new OnFailureListener() {
+//                    @Override
+//                    public void onFailure(@NonNull Exception e) {
+//                        Log.w("TAG", "Error writing document", e);
+//                    }
+//                });
     }
 
     private void getDataFromFirestore(){
@@ -173,8 +191,11 @@ class MenuFragment extends Fragment {
                             for (DocumentSnapshot d : list) {
                                 MyListData c = d.toObject(MyListData.class);
                                 myListData.add(c);
-                                n1++;
+                                if(n1 < c.getId()){
+                                    n1 = c.getId();
+                                }
                             }
+                            n1++;
                             adapter.notifyDataSetChanged();
                         } else {
                             Toast.makeText(getActivity(), "No data found in Database", Toast.LENGTH_SHORT).show();
