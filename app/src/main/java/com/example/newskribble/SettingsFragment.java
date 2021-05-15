@@ -61,7 +61,7 @@ public class SettingsFragment extends Fragment {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             reff.child(accountId).child("userName").setValue(textUser.getText().toString());
-                            Toast.makeText(getActivity(), "Username successfully changed", Toast.LENGTH_LONG).show();
+                            //Toast.makeText(getActivity(), "Username successfully changed", Toast.LENGTH_LONG).show();
                         }
 
                         @Override
@@ -78,7 +78,7 @@ public class SettingsFragment extends Fragment {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             reff.child(accountId).child("password").setValue(textPass.getText().toString());
-                            Toast.makeText(getActivity(), "Password successfully changed", Toast.LENGTH_LONG).show();
+                            //Toast.makeText(getActivity(), "Password successfully changed", Toast.LENGTH_LONG).show();
                         }
 
                         @Override
@@ -95,7 +95,7 @@ public class SettingsFragment extends Fragment {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             reff.child(accountId).child("email").setValue(textEmail.getText().toString());
-                            Toast.makeText(getActivity(), "Email successfully changed", Toast.LENGTH_LONG).show();
+                            //Toast.makeText(getActivity(), "Email successfully changed", Toast.LENGTH_LONG).show();
                         }
 
                         @Override

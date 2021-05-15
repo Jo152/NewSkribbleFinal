@@ -8,13 +8,17 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class Home extends AppCompatActivity {
 
@@ -23,7 +27,7 @@ public class Home extends AppCompatActivity {
     NavigationView        navigationView;
     View                  hView;
     TextView              nav_user;
-    DatabaseReference     reff;
+    DatabaseReference     reff, reff1;
     String username;
 
     @Override
@@ -41,8 +45,23 @@ public class Home extends AppCompatActivity {
         nav_user = (TextView) hView.findViewById(R.id.username);
 
         String accountId = getIntent().getStringExtra("currIdAccount");
-        reff = FirebaseDatabase.getInstance().getReference().child("Member");
-        //username = reff.child(accountId).child("userName").;
+        reff = FirebaseDatabase.getInstance().getReference().child("Member").child(accountId).child("userName");
+        //reff1.child(accountId).child("userName");
+        //username = (String) dataSnapshot.child("userName").getValue(String.class);
+        reff.addValueEventListener(new ValueEventListener() {
+            @Override
+            public
+            void onDataChange(@NonNull DataSnapshot snapshot) {
+                username = snapshot.getValue(String.class);
+                nav_user.setText(username);
+            }
+
+            @Override
+            public
+            void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
         nav_user.setText(username);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
