@@ -8,6 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -40,6 +41,8 @@ class MenuFragment extends Fragment implements View.OnClickListener {
     private MyListAdapter         adapter;
     private FirebaseFirestore     db;
     private int                   n1 = 1;
+    private String                info = "";
+    private EditText              text;
 
     @Nullable
     @Override
@@ -80,6 +83,10 @@ class MenuFragment extends Fragment implements View.OnClickListener {
 
         Button b1 = (Button) view.findViewById(R.id.button_note);
         b1.setOnClickListener(myhandler1);
+        Button b2 = (Button) view.findViewById(R.id.button_search);
+        b2.setOnClickListener(myhandler2);
+
+        text = (EditText) view.findViewById(R.id.edit_text);
 
         Button logout = view.findViewById(R.id.button_logout);
 
@@ -105,6 +112,28 @@ class MenuFragment extends Fragment implements View.OnClickListener {
             startActivity(i);
         }
     };
+
+    View.OnClickListener myhandler2 = new View.OnClickListener() {
+        public void onClick(View view) {
+            if(!text.getText().toString().equals("")){
+                info = text.getText().toString();
+                filterList(info);
+            }
+        }
+    };
+
+    private void filterList(String info){
+        ArrayList<Integer> list = new ArrayList<Integer>();
+        int i = 0;
+        for(MyListData data : myListData){
+            if (!data.getTitle().equals(info)){
+                list.add(i);
+                i++;
+            }
+        }
+        myListData.removeAll(list);
+        adapter.notifyDataSetChanged();
+    }
 
     private void addDataToFirestore(int id, String title, String content) {
         Map<String, Object> note = new HashMap<>();

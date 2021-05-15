@@ -21,7 +21,25 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Menu fragment" />
 
+    <EditText
+        android:id="@+id/edit_text"
+        android:layout_height="40dp"
+        android:layout_width="300dp"
+        android:hint="Search"
+        app:layout_constraintTop_toBottomOf="@+id/menu_header"
+        app:layout_constraintStart_toStartOf="parent"/>
 
+    <Button
+        android:id="@+id/button_search"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:text="Enter"
+        android:textColor="@color/black"
+        android:gravity="center"
+        android:textSize="15sp"
+        app:layout_constraintTop_toBottomOf="@+id/menu_header"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
 
     <androidx.recyclerview.widget.RecyclerView
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -35,7 +53,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/menu_header"
+        app:layout_constraintTop_toBottomOf="@+id/edit_text"
         app:layout_constraintBottom_toTopOf="@+id/menu_bottom"
         android:id="@+id/recyclerView">
     </androidx.recyclerview.widget.RecyclerView>
