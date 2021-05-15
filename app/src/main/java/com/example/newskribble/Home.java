@@ -9,14 +9,22 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class Home extends AppCompatActivity {
 
     DrawerLayout          drawerLayout;
     ActionBarDrawerToggle toggle;
     NavigationView        navigationView;
+    View                  hView;
+    TextView              nav_user;
+    DatabaseReference     reff;
+    String username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +36,14 @@ public class Home extends AppCompatActivity {
         drawerLayout = findViewById(R.id.drawer);
         navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this::onNavigationItemSelected);
+
+        hView = navigationView.getHeaderView(0);
+        nav_user = (TextView) hView.findViewById(R.id.username);
+
+        String accountId = getIntent().getStringExtra("currIdAccount");
+        reff = FirebaseDatabase.getInstance().getReference().child("Member");
+        //username = reff.child(accountId).child("userName").;
+        nav_user.setText(username);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -51,6 +67,7 @@ public class Home extends AppCompatActivity {
     private boolean onNavigationItemSelected(MenuItem menuItem) {
         switch (menuItem.getItemId()){
             case R.id.notesTab:
+
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new MenuFragment()).commit();
                 drawerLayout.closeDrawer(GravityCompat.START);
                 break;
