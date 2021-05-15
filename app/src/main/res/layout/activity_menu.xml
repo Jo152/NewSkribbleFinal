@@ -46,7 +46,6 @@
         tools:text="Menu"/>
 
 
-
     <androidx.recyclerview.widget.RecyclerView
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
