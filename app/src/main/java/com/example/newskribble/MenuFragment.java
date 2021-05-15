@@ -34,7 +34,7 @@ import java.util.List;
 import java.util.Map;
 
 public
-class MenuFragment extends Fragment implements View.OnClickListener {
+class MenuFragment extends Fragment {
     private RecyclerView          recyclerView;
     private ArrayList<MyListData> myListData;
     private MyListAdapter         adapter;
@@ -175,11 +175,5 @@ class MenuFragment extends Fragment implements View.OnClickListener {
         recyclerView.removeViewAt(id-1);
         adapter.notifyItemRemoved(id);
         adapter.notifyItemRangeChanged(id, myListData.size());
-    }
-
-    @Override
-    public
-    void onClick(View view) {
-
     }
 }
