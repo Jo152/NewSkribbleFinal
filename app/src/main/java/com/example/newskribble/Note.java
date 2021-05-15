@@ -42,18 +42,27 @@ public class Note extends AppCompatActivity {
     String content;
     String newTitle;
     String newContent;
+    int otherId = 0;
+    String string = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_note);
 
+        db = FirebaseFirestore.getInstance();
+
         Bundle extras = getIntent().getExtras();
         id = extras.getInt("id");
 
-        db = FirebaseFirestore.getInstance();
-
-        next(id);
+        if (getIntent().hasExtra("otherId")) {
+            otherId = extras.getInt("otherId");
+            next(id);
+        }
+        else{
+            string = String.valueOf(id);
+            nextNext(string);
+        }
     }
 
     private void next(int position){
@@ -92,7 +101,7 @@ public class Note extends AppCompatActivity {
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()) {
                         data = document.toObject(MyListData.class);
-                        setData();
+                        setData(name);
                     } else {
                         Log.d("TAG", "No such document");
                     }
@@ -103,7 +112,7 @@ public class Note extends AppCompatActivity {
         });
     }
 
-    public void setData(){
+    public void setData(String name){
         e1 = (EditText) findViewById(R.id.note_title);
         e1.setText(data.getTitle());
         e2 = (EditText) findViewById(R.id.note_text);
@@ -118,7 +127,7 @@ public class Note extends AppCompatActivity {
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                changeContent();
+                changeContent(name);
                 Intent i = new Intent(Note.this, Home.class);
                 startActivity(i);
             }
@@ -133,7 +142,7 @@ public class Note extends AppCompatActivity {
         });
     }
 
-    public void changeContent(){
+    public void changeContent(String name){
         newTitle = e1.getText().toString();
         newContent = e2.getText().toString();
 
@@ -146,7 +155,7 @@ public class Note extends AppCompatActivity {
             if(newContent != content){
                 data.put("content", newContent);
             }
-            db.collection("notes").document(String.valueOf(id))
+            db.collection("notes").document(name)
                     .set(data, SetOptions.merge());
         }
     }

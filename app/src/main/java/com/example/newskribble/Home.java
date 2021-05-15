@@ -44,25 +44,29 @@ public class Home extends AppCompatActivity {
         hView = navigationView.getHeaderView(0);
         nav_user = (TextView) hView.findViewById(R.id.username);
 
-        String accountId = getIntent().getStringExtra("currIdAccount");
-        reff = FirebaseDatabase.getInstance().getReference().child("Member").child(accountId).child("userName");
-        //reff1.child(accountId).child("userName");
-        //username = (String) dataSnapshot.child("userName").getValue(String.class);
-        reff.addValueEventListener(new ValueEventListener() {
-            @Override
-            public
-            void onDataChange(@NonNull DataSnapshot snapshot) {
-                username = snapshot.getValue(String.class);
-                nav_user.setText(username);
-            }
+        if (getIntent().hasExtra("currIdAccount")) {
+            String accountId = getIntent().getStringExtra("currIdAccount");
+            reff = FirebaseDatabase.getInstance().getReference().child("Member").child(accountId).child("userName");
+            //reff1.child(accountId).child("userName");
+            //username = (String) dataSnapshot.child("userName").getValue(String.class);
+            reff.addValueEventListener(new ValueEventListener() {
+                @Override
+                public
+                void onDataChange(@NonNull DataSnapshot snapshot) {
+                    username = snapshot.getValue(String.class);
+                    nav_user.setText(username);
+                }
 
-            @Override
-            public
-            void onCancelled(@NonNull DatabaseError error) {
+                @Override
+                public
+                void onCancelled(@NonNull DatabaseError error) {
 
-            }
-        });
-        nav_user.setText(username);
+                }
+            });
+            nav_user.setText(username);
+        }
+
+
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

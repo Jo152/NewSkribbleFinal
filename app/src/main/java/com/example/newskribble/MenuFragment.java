@@ -155,6 +155,7 @@ class MenuFragment extends Fragment {
                         // Go to new note activity
                         Intent i = new Intent(getActivity(), Note.class);
                         i.putExtra("id", id);
+                        i.putExtra("otherId", id);
                         Log.d("TAG", "ID: " + id);
                         startActivity(i);
                     }

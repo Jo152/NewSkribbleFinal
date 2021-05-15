@@ -40,8 +40,9 @@ public class MyListAdapter extends RecyclerView.Adapter<MyListAdapter.ViewHolder
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, Note.class);
-                intent.putExtra("id", data.getId());
-                Log.d("TAG", "ID: " + data.getId());
+                intent.putExtra("id", position);
+                intent.putExtra("otherId", position);
+                Log.d("TAG", "ID: " + position);
                 context.startActivity(intent);
             }
         });
