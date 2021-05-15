@@ -2,6 +2,7 @@ package com.example.newskribble;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,6 +41,7 @@ public class MyListAdapter extends RecyclerView.Adapter<MyListAdapter.ViewHolder
             public void onClick(View view) {
                 Intent intent = new Intent(context, Note.class);
                 intent.putExtra("id", data.getId());
+                Log.d("TAG", "ID: " + data.getId());
                 context.startActivity(intent);
             }
         });

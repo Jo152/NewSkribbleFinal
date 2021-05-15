@@ -110,10 +110,7 @@ class MenuFragment extends Fragment {
             String content = "";
             addDataToFirestore(id, title, content);
 
-            // Go to new note activity
-            Intent i = new Intent(getActivity(), Note.class);
-            i.putExtra("id", id);
-            startActivity(i);
+
         }
     };
 
@@ -154,6 +151,12 @@ class MenuFragment extends Fragment {
                         MyListData data = new MyListData(id, title, content);
                         myListData.add(myListData.size(), data);
                         adapter.notifyDataSetChanged();
+
+                        // Go to new note activity
+                        Intent i = new Intent(getActivity(), Note.class);
+                        i.putExtra("id", id);
+                        Log.d("TAG", "ID: " + id);
+                        startActivity(i);
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
