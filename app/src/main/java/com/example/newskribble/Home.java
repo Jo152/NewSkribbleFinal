@@ -7,6 +7,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -91,21 +92,21 @@ public class Home extends AppCompatActivity {
     private boolean onNavigationItemSelected(MenuItem menuItem) {
         switch (menuItem.getItemId()){
             case R.id.notesTab:
-
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new MenuFragment()).commit();
-                drawerLayout.closeDrawer(GravityCompat.START);
                 break;
             case R.id.settingsTab:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new SettingsFragment()).commit();
-                drawerLayout.closeDrawer(GravityCompat.START);
                 break;
             case R.id.LanguageTab:
-                drawerLayout.closeDrawer(GravityCompat.START);
                 break;
             case R.id.MusicTab:
-                drawerLayout.closeDrawer(GravityCompat.START);
+                break;
+            case R.id.LogOutTab:
+                Intent intent = new Intent(this, Login.class);
+                this.startActivity(intent);
                 break;
         }
+        drawerLayout.closeDrawer(GravityCompat.START);
 
         return true;
     }

@@ -107,15 +107,15 @@ class MenuFragment extends Fragment {
         Button b1 = (Button) view.findViewById(R.id.button_note);
         b1.setOnClickListener(myhandler1);
 
-        Button logout = view.findViewById(R.id.button_logout);
-
-        logout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(getActivity(), Login.class);
-                startActivity(i);
-            }
-        });
+//        Button logout = view.findViewById(R.id.button_logout);
+//
+//        logout.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent i = new Intent(getActivity(), Login.class);
+//                startActivity(i);
+//            }
+//        });
     }
 
     View.OnClickListener myhandler1 = new View.OnClickListener() {
