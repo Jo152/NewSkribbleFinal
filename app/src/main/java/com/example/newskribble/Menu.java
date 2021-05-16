@@ -31,6 +31,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+//Depreciated content, only here to show Eric's work in Git
 public class Menu extends AppCompatActivity {
 
     private RecyclerView recyclerView;

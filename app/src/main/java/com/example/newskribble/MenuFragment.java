@@ -69,8 +69,6 @@ class MenuFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(adapter);
 
-
-
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
             @Override
             public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
@@ -104,7 +102,6 @@ class MenuFragment extends Fragment {
 
         Button b1 = (Button) view.findViewById(R.id.button_note);
         b1.setOnClickListener(myhandler1);
-
     }
 
     View.OnClickListener myhandler1 = new View.OnClickListener() {
@@ -113,8 +110,6 @@ class MenuFragment extends Fragment {
             String title = "New Note";;
             String content = "";
             addDataToFirestore(id, title, content);
-
-
         }
     };
 
@@ -138,7 +133,6 @@ class MenuFragment extends Fragment {
                         // Go to new note activity
                         Intent i = new Intent(getActivity(), Note.class);
                         i.putExtra("otherId", documentReference.getId());
-                        i.putExtra("idThis", 2);
                         startActivity(i);
                     }
                 })
@@ -170,7 +164,6 @@ class MenuFragment extends Fragment {
                             Toast.makeText(getActivity(), "No data found in Database", Toast.LENGTH_SHORT).show();
                         }
                         n1++;
-                        Log.d("TAG", "current id = " + n1);
                     }
                 }).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -195,7 +188,6 @@ class MenuFragment extends Fragment {
                             Log.d("TAG", "Error document empty");
                         }
                         str = names.get(position);
-                        Log.d("TAG", "true name = " + str);
                         deleteDocument(position + 1, str);
                     }
                 }).addOnFailureListener(new OnFailureListener() {
@@ -222,7 +214,6 @@ class MenuFragment extends Fragment {
                     }
                 });
         n1--;
-        Log.d("TAG", "new id is " + n1);
         myListData.remove(id-1);
         itemsCopy.remove(id-1);
         recyclerView.removeViewAt(id-1);
