@@ -5,9 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -25,6 +27,7 @@ public class Register extends AppCompatActivity {
     DatabaseReference reff;
     Member member;
     long maxId = 0;
+    int i=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +39,7 @@ public class Register extends AppCompatActivity {
         textPass = (EditText) findViewById(R.id.passwordText);
         btnReg = (Button)findViewById(R.id.registerButton);
         member = new Member();
+
 
         reff = FirebaseDatabase.getInstance().getReference().child("Member");
         reff.addValueEventListener(new ValueEventListener() {
@@ -54,6 +58,7 @@ public class Register extends AppCompatActivity {
         btnReg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 String userName = textUser.getText().toString();
                 String email = textEmail.getText().toString();
                 String password = textPass.getText().toString();
@@ -63,7 +68,9 @@ public class Register extends AppCompatActivity {
 
                 //reff.push().setValue(member);
                 reff.child(String.valueOf(maxId+1)).setValue(member);
-                Toast.makeText(getApplicationContext(), "Register Successful", Toast.LENGTH_LONG).show();
+                //Toast.makeText(getApplicationContext(), "Register Successful", Toast.LENGTH_LONG).show();
+
+                goToLog(getCurrentFocus());
 
 
             }

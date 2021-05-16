@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="randomText">Bonjour, c\'est la vraie description de n\'importe quelle langue que vous avez choisie</string>
+
+
+    <string name="app_name">NouveauSkribble</string>
+    <string name="open">Ouvre</string>
+    <string name="close">Ferme</string>
+    <string name="title_activity_main">ActivitéPrincipale</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">Premier Fragment</string>
+    <string name="second_fragment_label">Deuxième Fragment</string>
+    <string name="next">Suivant</string>
+    <string name="previous">Précédent</string>
+    <string name="hello_first_fragment">Bonjour Premier fragment</string>
+    <string name="hello_second_fragment">Bonjour Deuxième fragment. Arg: %1$s</string>
+    <string name="title_activity_main2">ActivitéPrincipale</string>
+    <string name="music">Musique</string>
+    <string name="selectLang">Choisir la langue</string>
+    <string name="Username">Nom d\'utilisateur</string>
+    <string name="password">Mot de passe</string>
+    <string name="login">Accéder</string>
+    <string name="signuphere">... ou inscrivez-vous ici!</string>
+    <string name="note">Remarque</string>
+    <string name="back">Retour</string>
+    <string name="write">Écris quelque chose...</string>
+    <string name="enter">Entrer</string>
+    <string name="email">adresse e-mail</string>
+    <string name="register">S\'inscrire</string>
+    <string name="accountAl">Vous avez déjà un compte?</string>
+    <string name="logHere">Connectez-vous ici!</string>
+    <string name="settings">Paramètres</string>
+    <string name="changeUser">Changer le nom d\'utilisateur</string>
+    <string name="changePass">Changer le mot de passe</string>
+    <string name="changeEmail">Changer l\'e-mail</string>
+    <string name="save">Sauvegarder</string>
+    <string name="add">Ajouter</string>
+    <string name="hello">Bonjour, </string>
+    <string name="logout">Se déconnecter</string>
+    <string name="Language">Langue</string>
+    <string name="notes">Remarques</string>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</resources>

@@ -25,7 +25,7 @@
         app:layout_constraintStart_toStartOf="@+id/note_header"
         app:layout_constraintTop_toTopOf="@+id/note_header"
         android:background="@android:color/transparent"
-        android:text="Note"
+        android:text="@string/note"
         android:textColor="@color/black"
         android:gravity="center"
         android:textSize="25sp" />
@@ -37,7 +37,7 @@
         android:layout_marginBottom="2dp"
         android:layout_marginTop="4dp"
         android:layout_marginEnd="6dp"
-        android:text="Back"
+        android:text="@string/back"
         android:textColor="@color/white"
         android:gravity="center"
         android:textSize="20sp"
@@ -54,7 +54,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/note_header"
-        android:hint="Write something..." />
+        android:hint="@string/write" />
 
     <TextView
         android:id="@+id/note_bottom"
@@ -72,7 +72,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="2dp"
         android:layout_marginTop="2dp"
-        android:text="Enter"
+        android:text="@string/enter"
         android:textColor="@color/white"
         android:gravity="center"
         android:textSize="20sp"

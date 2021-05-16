@@ -100,9 +100,11 @@ public class Home extends AppCompatActivity {
                 drawerLayout.closeDrawer(GravityCompat.START);
                 break;
             case R.id.LanguageTab:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new LocalisationFragment()).commit();
                 drawerLayout.closeDrawer(GravityCompat.START);
                 break;
             case R.id.MusicTab:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FragmentMusic()).commit();
                 drawerLayout.closeDrawer(GravityCompat.START);
                 break;
         }

@@ -44,6 +44,7 @@ public class MyListAdapter extends RecyclerView.Adapter<MyListAdapter.ViewHolder
                 Intent intent = new Intent(context, Note.class);
                 intent.putExtra("id", position);
                 intent.putExtra("idThis", 1);
+
                 Log.d("TAG", "Position: " + position);
                 context.startActivity(intent);
             }
