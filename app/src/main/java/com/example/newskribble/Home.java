@@ -98,8 +98,10 @@ public class Home extends AppCompatActivity {
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new SettingsFragment()).commit();
                 break;
             case R.id.LanguageTab:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new LocalisationFragment()).commit();
                 break;
             case R.id.MusicTab:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FragmentMusic()).commit();
                 break;
             case R.id.LogOutTab:
                 Intent intent = new Intent(this, Login.class);
