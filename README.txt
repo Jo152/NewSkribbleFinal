@@ -53,6 +53,14 @@ Android Apps
 
   https://developers.google.com/fonts/docs/android
   https://developer.android.com/guide/topics/ui/look-and-feel/downloadable-fonts
+  
+  ## Features
+  - Create Notes
+  - Edit Notes
+  - Delete Notes
+  - Change UserName, Password and Email
+  - Listen to music
+  - Change Language 
 
 License
 -------
