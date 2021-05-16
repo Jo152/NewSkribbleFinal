@@ -46,8 +46,6 @@ class MenuFragment extends Fragment {
     private MyListAdapter         adapter;
     private FirebaseFirestore     db;
     private int                   n1 = 0;
-    private String                info = "";
-    private EditText              text;
     private String                str = "nope";
     private ArrayList<MyListData> itemsCopy;
 
@@ -107,15 +105,6 @@ class MenuFragment extends Fragment {
         Button b1 = (Button) view.findViewById(R.id.button_note);
         b1.setOnClickListener(myhandler1);
 
-//        Button logout = view.findViewById(R.id.button_logout);
-//
-//        logout.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent i = new Intent(getActivity(), Login.class);
-//                startActivity(i);
-//            }
-//        });
     }
 
     View.OnClickListener myhandler1 = new View.OnClickListener() {

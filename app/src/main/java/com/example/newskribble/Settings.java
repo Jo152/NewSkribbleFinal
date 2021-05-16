@@ -20,6 +20,16 @@ import com.google.firebase.database.ValueEventListener;
 public
 class Settings extends AppCompatActivity {
 
+
+    /*
+    *
+    *
+    * THIS IS NOT USED IN OUR PROJECT. THIS IS TO SHOW NICHOLAS' WORK. PLEASE DISREGARD AND MOVE TO
+    * SETTINGSFRAGEMENT
+    *
+    * */
+
+
     EditText textUser,textEmail, textPass;
     Button btnSave;
     DatabaseReference reff;
