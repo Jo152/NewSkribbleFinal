@@ -44,6 +44,7 @@ public class Home extends AppCompatActivity {
         hView = navigationView.getHeaderView(0);
         nav_user = (TextView) hView.findViewById(R.id.username);
 
+        // If it doesn't have an account id, then idk, someone fix it
         if (getIntent().hasExtra("currIdAccount")) {
             String accountId = getIntent().getStringExtra("currIdAccount");
             reff = FirebaseDatabase.getInstance().getReference().child("Member").child(accountId).child("userName");

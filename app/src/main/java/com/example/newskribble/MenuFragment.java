@@ -124,16 +124,16 @@ class MenuFragment extends Fragment {
     };
 
     private void filterList(String info){
-        ArrayList<Integer> list = new ArrayList<Integer>();
-        int i = 0;
-        for(MyListData data : myListData){
-            if (!data.getTitle().equals(info)){
-                list.add(i);
-                i++;
-            }
-        }
-        myListData.removeAll(list);
-        adapter.notifyDataSetChanged();
+//        ArrayList<Integer> list = new ArrayList<Integer>();
+//        int i = 0;
+//        for(MyListData data : myListData){
+//            if (!data.getTitle().equals(info)){
+//                list.add(i);
+//                i++;
+//            }
+//        }
+//        myListData.removeAll(list);
+//        adapter.notifyDataSetChanged();
     }
 
     private void addDataToFirestore(int id, String title, String content) {
