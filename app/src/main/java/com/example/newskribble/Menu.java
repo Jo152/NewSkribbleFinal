@@ -35,6 +35,7 @@ public class Menu extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private ArrayList<MyListData> myListData;
+    private ArrayList<MyListData> itemsCopy;
     private MyListAdapter adapter;
     private FirebaseFirestore db;
     private int n1 = 1;
@@ -62,7 +63,8 @@ public class Menu extends AppCompatActivity {
 
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         myListData = new ArrayList<>();
-        adapter = new MyListAdapter(myListData, this);
+        itemsCopy = new ArrayList<>();
+        adapter = new MyListAdapter(myListData, this, itemsCopy);
         db = FirebaseFirestore.getInstance();
 
         recyclerView.setHasFixedSize(true);

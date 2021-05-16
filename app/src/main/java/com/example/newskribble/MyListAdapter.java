@@ -19,10 +19,10 @@ public class MyListAdapter extends RecyclerView.Adapter<MyListAdapter.ViewHolder
     private Context context;
     private ArrayList<MyListData> itemsCopy;
 
-    public MyListAdapter(ArrayList<MyListData> list, Context context) {
+    public MyListAdapter(ArrayList<MyListData> list, Context context, ArrayList<MyListData> itemsCopy) {
         this.list = list;
         this.context = context;
-        this.itemsCopy = list;
+        this.itemsCopy = itemsCopy;
     }
 
     @NonNull
@@ -69,23 +69,28 @@ public class MyListAdapter extends RecyclerView.Adapter<MyListAdapter.ViewHolder
 
     public Context getContext(){ return context; }
 
-    public void deleteItem(int position) {
-        list.remove(position);
-        notifyItemRemoved(position);
-    }
-
     public void filter(String text) {
+        for(MyListData item: itemsCopy){
+            Log.d("TAG", "items are " + item.getTitle());
+        }
+        Log.d("TAG", "items size " + itemsCopy.size());
         list.clear();
         if(text.isEmpty()){
             list.addAll(itemsCopy);
+            Log.d("TAG", "added all");
         } else{
+            Log.d("TAG", "went to else");
             text = text.toLowerCase();
+            Log.d("TAG", "text is " + text);
             for(MyListData item: itemsCopy){
+                Log.d("TAG", "went to " + item);
                 if(item.getTitle().toLowerCase().contains(text)){
                     list.add(item);
+                    Log.d("TAG", "added " + item);
                 }
             }
         }
+        Log.d("TAG", "done");
         notifyDataSetChanged();
     }
 }

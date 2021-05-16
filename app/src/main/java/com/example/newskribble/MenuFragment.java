@@ -49,6 +49,7 @@ class MenuFragment extends Fragment {
     private String                info = "";
     private EditText              text;
     private String                str = "nope";
+    private ArrayList<MyListData> itemsCopy;
 
     @Nullable
     @Override
@@ -62,12 +63,15 @@ class MenuFragment extends Fragment {
 
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
         myListData = new ArrayList<>();
-        adapter = new MyListAdapter(myListData, getActivity());
+        itemsCopy = new ArrayList<>();
+        adapter = new MyListAdapter(myListData, getActivity(), itemsCopy);
         db = FirebaseFirestore.getInstance();
 
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(adapter);
+
+
 
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
             @Override
@@ -140,6 +144,7 @@ class MenuFragment extends Fragment {
                         myListData.add(myListData.size(), data);
                         adapter.notifyDataSetChanged();
                         n1++;
+                        itemsCopy.add(myListData.size(), data);
 
                         // Go to new note activity
                         Intent i = new Intent(getActivity(), Note.class);
@@ -154,8 +159,6 @@ class MenuFragment extends Fragment {
                         Log.w("TAG", "Error adding document", e);
                     }
                 });
-
-
     }
 
     private void getDataFromFirestore(){
@@ -178,6 +181,7 @@ class MenuFragment extends Fragment {
                         }
                         n1++;
                         Log.d("TAG", "current id = " + n1);
+                        itemsCopy.addAll(myListData);
                     }
                 }).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -231,6 +235,7 @@ class MenuFragment extends Fragment {
         n1--;
         Log.d("TAG", "new id is " + n1);
         myListData.remove(id-1);
+        itemsCopy.remove(id-1);
         recyclerView.removeViewAt(id-1);
         adapter.notifyItemRemoved(id);
         adapter.notifyItemRangeChanged(id, myListData.size());
