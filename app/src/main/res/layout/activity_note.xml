@@ -14,7 +14,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:background="#660099"/>
+        android:background="@color/blue"/>
 
     <EditText
         android:id="@+id/note_title"
@@ -38,7 +38,7 @@
         android:layout_marginTop="4dp"
         android:layout_marginEnd="6dp"
         android:text="Back"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:gravity="center"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/note_title"
@@ -64,7 +64,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:background="#660099" />
+        android:background="@color/blue" />
 
     <Button
         android:id="@+id/button_editNote"
@@ -73,7 +73,7 @@
         android:layout_marginBottom="2dp"
         android:layout_marginTop="2dp"
         android:text="Enter"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:gravity="center"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/note_bottom"
