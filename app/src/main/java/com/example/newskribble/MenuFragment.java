@@ -131,9 +131,9 @@ class MenuFragment extends Fragment {
                         Log.d("TAG", "DocumentSnapshot written with ID: " + documentReference.getId());
                         MyListData data = new MyListData(id, title, content);
                         myListData.add(myListData.size(), data);
+                        itemsCopy.add(itemsCopy.size(), data);
                         adapter.notifyDataSetChanged();
                         n1++;
-                        itemsCopy.add(myListData.size(), data);
 
                         // Go to new note activity
                         Intent i = new Intent(getActivity(), Note.class);
@@ -160,6 +160,7 @@ class MenuFragment extends Fragment {
                             for (DocumentSnapshot d : list) {
                                 MyListData c = d.toObject(MyListData.class);
                                 myListData.add(c);
+                                itemsCopy.add(c);
                                 if(n1 < c.getId()){
                                     n1 = c.getId();
                                 }
@@ -170,7 +171,6 @@ class MenuFragment extends Fragment {
                         }
                         n1++;
                         Log.d("TAG", "current id = " + n1);
-                        itemsCopy.addAll(myListData);
                     }
                 }).addOnFailureListener(new OnFailureListener() {
             @Override
