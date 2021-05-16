@@ -42,8 +42,11 @@ public class Note extends AppCompatActivity {
     String content;
     String newTitle;
     String newContent;
-    int otherId = 0;
+    String otherId = "";
     String string = "";
+    String string2 = "";
+    int integer = 0;
+    int idThis = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,46 +56,57 @@ public class Note extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
 
         Bundle extras = getIntent().getExtras();
-        id = extras.getInt("id");
+        idThis = extras.getInt("idThis");
 
-        if (getIntent().hasExtra("otherId")) {
-            otherId = extras.getInt("otherId");
-            next(id);
+        if (idThis == 2) {
+            otherId = extras.getString("otherId");
+            Log.d("TAG", "name is " + otherId);
+            next(integer, otherId);
         }
         else{
-            string = String.valueOf(id);
-            nextNext(string);
+            id = extras.getInt("id");
+            next(id, string2);
         }
     }
 
-    private void next(int position){
-        db.collection("notes").get()
-                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                    @Override
-                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                        ArrayList<String> names = new ArrayList<String>();
-                        if (!queryDocumentSnapshots.isEmpty()) {
-                            List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
-                            for (DocumentSnapshot d : list) {
-                                names.add(d.getId());
-                                Log.d("TAG", "name = " + d.getId());
+    private void next(int position, String name){
+        if (idThis == 2){
+            Log.d("TAG", "name is " + name);
+            goThen(name);
+        }
+        else{
+            Log.d("TAG", "This is next");
+            db.collection("notes").get()
+                    .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                        @Override
+                        public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                            ArrayList<String> names = new ArrayList<String>();
+                            if (!queryDocumentSnapshots.isEmpty()) {
+                                List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
+                                for (DocumentSnapshot d : list) {
+                                    names.add(d.getId());
+                                }
+                                String str = names.get(position);
+                                Log.d("TAG", "true name = " + str);
+                                goThen(str);
+
+
+                            } else {
+                                Log.d("TAG", "Error document empty");
                             }
-                        } else {
-                            Log.d("TAG", "Error document empty");
+
                         }
-                        String str = names.get(position);
-                        Log.d("TAG", "true name = " + str);
-                        nextNext(str);
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Log.d("TAG", "Error getting document");
-            }
-        });
+                    }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Log.d("TAG", "Error getting document");
+                }
+            });
+        }
+
     }
 
-    public void nextNext(String name){
+    public void goThen(String name){
         DocumentReference docRef = db.collection("notes").document(name);
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override

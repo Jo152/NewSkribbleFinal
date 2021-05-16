@@ -17,10 +17,12 @@ import java.util.ArrayList;
 public class MyListAdapter extends RecyclerView.Adapter<MyListAdapter.ViewHolder> {
     private ArrayList<MyListData> list;
     private Context context;
+    private ArrayList<MyListData> itemsCopy;
 
     public MyListAdapter(ArrayList<MyListData> list, Context context) {
         this.list = list;
         this.context = context;
+        this.itemsCopy = list;
     }
 
     @NonNull
@@ -41,8 +43,8 @@ public class MyListAdapter extends RecyclerView.Adapter<MyListAdapter.ViewHolder
             public void onClick(View view) {
                 Intent intent = new Intent(context, Note.class);
                 intent.putExtra("id", position);
-                intent.putExtra("otherId", position);
-                Log.d("TAG", "ID: " + position);
+                intent.putExtra("idThis", 1);
+                Log.d("TAG", "Position: " + position);
                 context.startActivity(intent);
             }
         });
@@ -70,5 +72,20 @@ public class MyListAdapter extends RecyclerView.Adapter<MyListAdapter.ViewHolder
     public void deleteItem(int position) {
         list.remove(position);
         notifyItemRemoved(position);
+    }
+
+    public void filter(String text) {
+        list.clear();
+        if(text.isEmpty()){
+            list.addAll(itemsCopy);
+        } else{
+            text = text.toLowerCase();
+            for(MyListData item: itemsCopy){
+                if(item.getTitle().toLowerCase().contains(text)){
+                    list.add(item);
+                }
+            }
+        }
+        notifyDataSetChanged();
     }
 }

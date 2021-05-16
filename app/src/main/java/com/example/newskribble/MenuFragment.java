@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -44,7 +45,7 @@ class MenuFragment extends Fragment {
     private ArrayList<MyListData> myListData;
     private MyListAdapter         adapter;
     private FirebaseFirestore     db;
-    private int                   n1 = 1;
+    private int                   n1 = 0;
     private String                info = "";
     private EditText              text;
     private String                str = "nope";
@@ -58,8 +59,6 @@ class MenuFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-
 
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
         myListData = new ArrayList<>();
@@ -85,12 +84,24 @@ class MenuFragment extends Fragment {
 
         getDataFromFirestore();
 
+        SearchView searchView = (SearchView) view.findViewById(R.id.search1);
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                adapter.filter(query);
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                adapter.filter(newText);
+                return true;
+            }
+        });
+
         Button b1 = (Button) view.findViewById(R.id.button_note);
         b1.setOnClickListener(myhandler1);
-        Button b2 = (Button) view.findViewById(R.id.button_search);
-        b2.setOnClickListener(myhandler2);
-
-        text = (EditText) view.findViewById(R.id.edit_text);
 
         Button logout = view.findViewById(R.id.button_logout);
 
@@ -114,28 +125,6 @@ class MenuFragment extends Fragment {
         }
     };
 
-    View.OnClickListener myhandler2 = new View.OnClickListener() {
-        public void onClick(View view) {
-            if(!text.getText().toString().equals("")){
-                info = text.getText().toString();
-                filterList(info);
-            }
-        }
-    };
-
-    private void filterList(String info){
-//        ArrayList<Integer> list = new ArrayList<Integer>();
-//        int i = 0;
-//        for(MyListData data : myListData){
-//            if (!data.getTitle().equals(info)){
-//                list.add(i);
-//                i++;
-//            }
-//        }
-//        myListData.removeAll(list);
-//        adapter.notifyDataSetChanged();
-    }
-
     private void addDataToFirestore(int id, String title, String content) {
         Map<String, Object> note = new HashMap<>();
         note.put("id", id);
@@ -147,16 +136,15 @@ class MenuFragment extends Fragment {
                     @Override
                     public void onSuccess(DocumentReference documentReference) {
                         Log.d("TAG", "DocumentSnapshot written with ID: " + documentReference.getId());
-                        n1++;
                         MyListData data = new MyListData(id, title, content);
                         myListData.add(myListData.size(), data);
                         adapter.notifyDataSetChanged();
+                        n1++;
 
                         // Go to new note activity
                         Intent i = new Intent(getActivity(), Note.class);
-                        i.putExtra("id", id);
-                        i.putExtra("otherId", id);
-                        Log.d("TAG", "ID: " + id);
+                        i.putExtra("otherId", documentReference.getId());
+                        i.putExtra("idThis", 2);
                         startActivity(i);
                     }
                 })
@@ -166,23 +154,8 @@ class MenuFragment extends Fragment {
                         Log.w("TAG", "Error adding document", e);
                     }
                 });
-//        db.collection("notes").document(String.valueOf(n1))
-//                .set(note)
-//                .addOnSuccessListener(new OnSuccessListener<Void>() {
-//                    @Override
-//                    public void onSuccess(Void aVoid) {
-//                        n1++;
-//                        MyListData data = new MyListData(id, title, content);
-//                        myListData.add(myListData.size(), data);
-//                        adapter.notifyDataSetChanged();
-//                    }
-//                })
-//                .addOnFailureListener(new OnFailureListener() {
-//                    @Override
-//                    public void onFailure(@NonNull Exception e) {
-//                        Log.w("TAG", "Error writing document", e);
-//                    }
-//                });
+
+
     }
 
     private void getDataFromFirestore(){
@@ -199,11 +172,12 @@ class MenuFragment extends Fragment {
                                     n1 = c.getId();
                                 }
                             }
-                            n1++;
                             adapter.notifyDataSetChanged();
                         } else {
                             Toast.makeText(getActivity(), "No data found in Database", Toast.LENGTH_SHORT).show();
                         }
+                        n1++;
+                        Log.d("TAG", "current id = " + n1);
                     }
                 }).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -223,14 +197,12 @@ class MenuFragment extends Fragment {
                             List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
                             for (DocumentSnapshot d : list) {
                                 names.add(d.getId());
-                                Log.d("TAG", "name = " + d.getId());
                             }
                         } else {
                             Log.d("TAG", "Error document empty");
                         }
                         str = names.get(position);
                         Log.d("TAG", "true name = " + str);
-                        Log.d("TAG", "true name 2 = " + str);
                         deleteDocument(position + 1, str);
                     }
                 }).addOnFailureListener(new OnFailureListener() {
@@ -257,6 +229,7 @@ class MenuFragment extends Fragment {
                     }
                 });
         n1--;
+        Log.d("TAG", "new id is " + n1);
         myListData.remove(id-1);
         recyclerView.removeViewAt(id-1);
         adapter.notifyItemRemoved(id);

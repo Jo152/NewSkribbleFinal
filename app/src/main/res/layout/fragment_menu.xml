@@ -21,8 +21,8 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Menu fragment" />
 
-    <EditText
-        android:id="@+id/edit_text"
+    <SearchView
+        android:id="@+id/search1"
         android:layout_height="40dp"
         android:layout_width="300dp"
         android:hint="Search"
@@ -53,7 +53,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit_text"
+        app:layout_constraintTop_toBottomOf="@+id/search1"
         app:layout_constraintBottom_toTopOf="@+id/menu_bottom"
         android:id="@+id/recyclerView">
     </androidx.recyclerview.widget.RecyclerView>
